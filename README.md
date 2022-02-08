@@ -2,7 +2,7 @@
 
 A better UX for Youtube
 
-![](https://github.com/greggman/u2b-ux/raw/master/screenshots/ub2-ux-01.jpg)
+![](https://github.com/greggman/u2b-ux/raw/main/screenshots/ub2-ux-01.jpg)
 
 ---
 
