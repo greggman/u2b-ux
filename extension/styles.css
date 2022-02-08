@@ -1,0 +1,64 @@
+.gux-thumbnail {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.gux-button {
+  width: 20px;
+  height: 20px;
+  margin: 2px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #666;
+  cursor: pointer;
+}
+.gux-button:hover {
+  background-color: #AAA;
+}
+.gux-not-interested {
+}
+.gux-watched {
+}
+.gux-hidden {
+  color: #888;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 10pt;
+  text-align: center;
+}
+.gux-hidden>* {
+  margin: 1em;
+}
+.gux-hidden button {
+  opacity: 25%;
+  cursor: pointer;
+}
+.gux-hidden button:hover {
+  opacity: 50%;
+}
+
+[data-gux-tooltip]:before {
+    content: attr(data-gux-tooltip);
+    position: absolute;
+    opacity: 0;
+    white-space: nowrap;  
+    
+    transition: all 0.15s ease;
+    padding: 0.25em;
+    color: #FFF;
+}
+
+[data-gux-tooltip]:hover:before {
+    opacity: 1;
+    
+    background: #000;
+    margin-top: -4em;
+    margin-left: 0;
+}
+
+[data-gux-tooltip]:not([data-gux-tooltip-persistent]):before {
+    pointer-events: none;
+}

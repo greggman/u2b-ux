@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "u2b-ux",
+  "version": "1.0.0",
+  "description": "Added UX for Youtube",
+  "author": "Gregg Tavares",
+  "content_scripts": [{
+    "css": ["styles.css"],
+    "js": ["content.js"],
+    "matches": [
+      "*://youtube.com/*",
+      "*://www.youtube.com/*",
+      "*://m.youtube.com/*"
+    ],
+    "exclude_matches": ["*://*.music.youtube.com/*"]
+  }],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "homepage_url": "https://github.com/greggman/u2b-ux",
+  "permissions": [
+  ],
+  "optional_permissions": [
+  ],
+  "host_permissions": [
+    "*://*.youtube.com/"
+  ]
+}
