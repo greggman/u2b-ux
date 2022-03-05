@@ -4,7 +4,8 @@
   }
 
   const settings = {
-    watchedThreshold: 20,
+    watchedThreshold: 80,
+    hideThreshold: 50,
   };
 
   const wait = (ms = 0) => new Promise(resolve => setTimeout(resolve, ms));
@@ -134,12 +135,32 @@
     }
   }
 
+  const queue = [];
+  let processingQueue = false;
+  async function processQueue() {
+    if (processingQueue) {
+      return;
+    }
+    processingQueue = true;
+    while (queue.length) {
+      const {fn, args} = queue.shift();
+      await fn(...args);
+    }
+    processingQueue = false;
+  }
+
+  function queueMarkAsNotInterestedForReason(...args) {
+    queue.push({fn: markAsNotInterestedForReason, args});
+    processQueue();
+  }
+
+
   function notInterested(thumbElem) {
-    markAsNotInterestedForReason(thumbElem, /I don't like the video/i);
+    queueMarkAsNotInterestedForReason(thumbElem, /I don't like the video/i);
   }
 
   function watched(thumbElem) {
-    markAsNotInterestedForReason(thumbElem, /I've already watched the video/i);
+    queueMarkAsNotInterestedForReason(thumbElem, /I've already watched the video/i);
   }
 
   function unhideViewed(thumbElem, hiddenUIElem) {
@@ -172,6 +193,8 @@
     try {
       const progress = parseInt(progressElem.style.width);
       if (progress >= settings.watchedThreshold) {
+        setTimeout(() => watched(thumbElem), 500);
+      } else if (progress >= progress.hideThreshold) {
         hideThumbnail(thumbElem, `progress: ${progress}%`);
       }
     } catch (e) {
